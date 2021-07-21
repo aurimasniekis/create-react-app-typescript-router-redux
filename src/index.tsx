@@ -1,14 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import { HelmetProvider } from 'react-helmet-async';
+import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'connected-react-router';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import store, { history } from './redux';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <HelmetProvider>
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <App history={history} />
+        </ConnectedRouter>
+      </Provider>
+    </HelmetProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 // If you want to start measuring performance in your app, pass a function
